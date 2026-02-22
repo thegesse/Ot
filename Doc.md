@@ -47,18 +47,18 @@ There are also the **while** and **for** loops included
 - While loops
     - Whilst_The_Truth_Remains (expression)
     - Within_This_Realm_Begin
-      (body statement)
+      - (body statement)
     - By_Its_Edict_Conclude
     
 - For loops
     - Initiate_The_Recursive_Protocol_Under_The_Guise_Of
-        (initialization statement)
+        - (initialization statement)
     - While_The_Observation_Holds_True
-        (condition expression)
+        - (condition expression)
     - Until_The_Incremental_Shift_Reaches
-        (step statement)
+        - (step statement)
     - Within_This_Realm_Begin
-        (body statement)
+        - (body statement)
     - By_Its_Edict_Conclude
 
 ## Conditions
@@ -66,15 +66,15 @@ Also added conditions to the language:
 
 - In_The_Event_That (expression)
 - Within_This_Realm_Begin
-    (If-Body)
+    - (If-Body)
 - By_Its_Edict_Conclude
 
 - In_The_Alternative_That (expression)
 - Within_This_Realm_Begin
-    (Elif-Body)
+    - (Elif-Body)
 - By_Its_Edict_Conclude
 
 - Otherwise_Should_The_Void_Remain
 - Within_This_Realm_Begin
-    (Else-Body)
+    - (Else-Body)
 - By_Its_Edict_Conclude
