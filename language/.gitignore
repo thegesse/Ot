@@ -1,0 +1,14 @@
+/target/
+
+/ritual_exec
+/output.ll
+/output.o
+
+.env
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.DS_Store
+Thumbs.db
