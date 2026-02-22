@@ -39,13 +39,11 @@ impl<'ctx> Compiler<'ctx> {
         match stmt {
             Statement::Manifestation { name, value, .. } => {
                 let val = self.compile_expression(value);
-                
-                // Check if the variable already exists in our map
+
                 let mut vars = self.variables.borrow_mut();
                 let ptr = if let Some(&existing_ptr) = vars.get(&name) {
                     existing_ptr // Use the old spot in memory
                 } else {
-                    // Only create a NEW spot if it's the first time we see this name
                     let new_ptr = self.builder.build_alloca(val.get_type(), &name).unwrap();
                     vars.insert(name.clone(), new_ptr);
                     new_ptr
@@ -145,26 +143,14 @@ impl<'ctx> Compiler<'ctx> {
                 let vars = self.variables.borrow();
                 let ptr = vars.get(&name).expect("IDENTIFIER UNKNOWN");
                 
-                // Get the type of the value stored at this address
-                // Instead of hardcoding i32_type(), we query the pointer's element type
+
                 let ptr_type = ptr.get_type();
-                
-                // In Inkwell, we need to know what we're loading.
-                // For now, let's peek at what we stored. 
-                // A better way for your specific setup:
                 let load_type = self.builder.get_insert_block()
                     .unwrap()
                     .get_parent()
                     .unwrap()
-                    .get_type(); // This is a bit complex, let's simplify:
-
-                // SIMPLIFIED VERSION: 
-                // Since we don't have a full type system yet, 
-                // we can try to guess based on the pointer address.
+                    .get_type();
                 let val = self.builder.build_load(self.context.i32_type(), *ptr, &name).unwrap();
-                
-                // If the address looks like a pointer (string), we return the pointer itself
-                // But for a true fix, we should store strings and ints differently.
                 val.into()
             }
             Expression::BinaryOp(left, op, right) => {
