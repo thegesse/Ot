@@ -35,7 +35,7 @@ pub enum Statement {
 #[derive(Debug, Clone)]
 pub enum Expr {
     Integer(i64),
-    StringLiteral(String), // Add this line
+    StringLiteral(String),
     Var(String),
     BinaryOp {
         left: Box<Expr>,
