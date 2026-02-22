@@ -4,10 +4,8 @@ use chumsky::prelude::*;
 use crate::lexer::Token;
 use crate::ast::*;
 
-// This is the complete parser that handles Manifestations, Print, and Loops
 pub fn parser() -> impl Parser<'static, &'static [Token], Vec<Statement>, extra::Err<Rich<'static, Token>>> {
-    
-    // 1. Expression Parser: Handles Math, Variables, and Strings
+
     let expr = recursive(|expr| {
         let val = select! {
             Token::Integer(v) => Expression::LiteralInt(v),
@@ -27,10 +25,7 @@ pub fn parser() -> impl Parser<'static, &'static [Token], Vec<Statement>, extra:
         })
     });
 
-    // 2. Statement Parser: The different actions the ritual can perform
     let stmt = recursive(|stmt| {
-        
-        // Variable Assignment: The_Quantity_Of_Whole_Existence x Shall_Henceforth_Be_Seen_as 5 ...
         let manifestation = select! { Token::IntType => () }
             .then(select! { Token::Ident(name) => name })
             .then_ignore(select! { Token::Assignment => () })
