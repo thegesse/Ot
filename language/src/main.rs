@@ -40,12 +40,10 @@ fn main() {
         
         compiler.module.print_to_file("output.ll").unwrap();
         
-        // Add your Clang Command call here!
         println!("The ritual has been transcribed to LLVM IR.");
     } else {
         println!("The ritual contains errors. The universe remains silent:");
         for error in errors {
-            // This will show you exactly which token caused the panic
             let span = error.span();
             println!("Error: {:?} at span {:?}", error.reason(), span);
         }
